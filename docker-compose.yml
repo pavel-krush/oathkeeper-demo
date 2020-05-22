@@ -1,0 +1,22 @@
+version: '3'
+services:
+  
+  protected:
+    image: protected:latest
+    ports:
+      - 8080:8080
+
+  authorizer:
+    image: authorizer:latest
+    ports:
+      - 8081:8081
+
+  oathkeeper:
+    image: oryd/oathkeeper
+    command: serve --config=/conf/config.yml
+    volumes:
+      - ./conf:/conf
+    ports:
+      - 4456:4456
+      - 4455:4455
+      - 9000:9000

@@ -1,0 +1,12 @@
+- id: "proxy-all"
+  upstream:
+    url: "http://protected:8080/protected"
+  match:
+    url: "http://localhost:4455/"
+    methods: ["GET"]
+  authenticators:
+    - handler: "anonymous"
+  authorizer:
+    handler: "remote"
+  mutators:
+    - handler: "header"

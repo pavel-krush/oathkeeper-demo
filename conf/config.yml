@@ -1,0 +1,25 @@
+access_rules:
+  repositories:
+    - file:///conf/rules.yml
+  matching_strategy: glob
+
+authenticators:
+  anonymous:
+    enabled: true
+    config:
+      subject: user1
+
+authorizers:
+  remote:
+    enabled: true
+    config:
+      remote: "http://authorizer:8081/authorize"
+      headers:
+        X-Subject: '{{ print .Subject }}'
+
+mutators:
+  header:
+    enabled: true
+    config:
+      headers:
+        X-Subject: '{{ print .Subject }}'
